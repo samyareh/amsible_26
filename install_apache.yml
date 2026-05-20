@@ -20,3 +20,25 @@
        name: libapache2-mod-php
        state: latest
      when: ansible_distribution == "Ubuntu"
+
+
+   - name: update the repos
+     yum:
+       update_cache: true
+     when: ansible_distribution == "CentOS"
+
+
+   - name: install apache package
+     yum:
+       name: httpd
+       state: latest
+     when: ansible_distribution == "CentOS"
+
+
+   - name: install php 
+     yum:
+       name: php
+       state: latest
+     when: ansible_distribution == "CentOS"
+
+
