@@ -4,41 +4,27 @@
    become: true
    tasks:
 
-   - name: update the repos
+  
+   - name: update then install apache2 and php packages for Ubuntu
      apt:
-       update_cache: true
-     when: ansible_distribution == "Ubuntu"
+       name: 
+         - apache2
+         - libapache2-mod-php
+       state: latest
+       update_cache: yes
+     when: ansible_distribution in ["Ubuntu" , "Debian"]   
    
-   - name: install apache2 package
-     apt:
-       name: apache2
-       state: latest
-     when: ansible_distribution == "Ubuntu"   
-   
-   - name: install php to support apache2
-     apt:
-       name: libapache2-mod-php
-       state: latest
-     when: ansible_distribution == "Ubuntu"
 
 
-   - name: update the repos
+  
+   - name: update then install apache and php packages for CentOS
      yum:
-       update_cache: true
+       name: 
+          - httpd
+          - php
+       state: latest
+       update_cache: yes
      when: ansible_distribution == "CentOS"
 
 
-   - name: install apache package
-     yum:
-       name: httpd
-       state: latest
-     when: ansible_distribution == "CentOS"
-
-
-   - name: install php 
-     yum:
-       name: php
-       state: latest
-     when: ansible_distribution == "CentOS"
-
-
+ 
