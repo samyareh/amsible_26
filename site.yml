@@ -4,6 +4,7 @@
   tasks: 
 
     - name: install updates (CentOS)
+      tags: always
       yum:
         update_cache: yes
         update_only: yes
@@ -11,6 +12,7 @@
 
 
     - name: install updates (Ubuntu and Debian)
+      tags: always
       apt:
         update_cache: yes
         upgrade: dist
@@ -22,6 +24,7 @@
    tasks:
 
      - name: install apache and php for CentOS
+       tags: apache,httpd,centos
        dnf:
          name:
             - httpd
@@ -31,6 +34,7 @@
 
 
      - name: install apache and php for Ubuntu
+       tags: apache,apache2,ubuntu
        apt:
          name:
             - apache2
@@ -44,6 +48,7 @@
    tasks:
 
      - name: install mariadb (Debian)
+       tags: debian, db, mariadb
        apt:
          name: mariadb-server
          state: latest
